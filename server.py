@@ -26,4 +26,4 @@ def handle_client_datach3(data):
     socketio.emit('response_chschoolstuff', {'message': f"{data['content']}"})
 
 if __name__ == '__main__':
-    socketio.run(app, allow_unsafe_werkzeug=True)
+    socketio.run(app, allow_unsafe_werkzeug=True, host='0.0.0.0')
