@@ -332,6 +332,10 @@
                 socket.on(newReChannel, async function(data) {
                     console.log(`[${newReChannel}] ${data.message}`);
                     visibleMsgDict.push(data.message);
+                    //if (!data.message === oldMsg) {
+                        //notifyUser(data.message);
+                    //}
+                    notifyUser(data.message);
                     handleScreenMsgs();
                     draw();
                 });
@@ -339,7 +343,10 @@
                 currentListener = newReChannel;
             }
 
+            let oldMsg = "";
+
             function sendMsg(msgCntnt) {
+                oldMsg = msgCntnt;
                 socket.emit(msgChannel, { 'content': msgCntnt });
             }
 
@@ -350,7 +357,32 @@
                 //draw();
             //});
 
+            function requestNotificationPermission() {
+                if (Notification.permission === "default") {
+                    Notification.requestPermission().then(permission => {
+                        if (permission === "granted") {
+                            alert("Notification permission granted!");
+                        } else {
+                            alert("Notification permission denied.");
+                        }
+                    });
+                }
+            }
+
+            function notifyUser(msgnotify) {
+                if (Notification.permission === "granted") {
+                    new Notification("RetroChat", {
+                        body: msgnotify,
+                        icon: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrq2qwK-wucOCWxwMPokQRVxKF1-RMbf011Q&s"
+                    });
+                } else {
+                    alert("You need to grant notification permissions first.");
+                }
+            }
+
             switchChannel("message_chmain", "response_chmain");
+
+            document.addEventListener("DOMContentLoaded", requestNotificationPermission);
         </script>
     </body>
 </html>
