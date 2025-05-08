@@ -156,7 +156,7 @@
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 ctx.font = '25px Monospace';
                 ctx.fillStyle = 'green';
-                ctx.fillText('Retro Chat!', 10, 40);
+                ctx.fillText('Retro Chat! | ' + curCh, 10, 40);
                 ctx.fillText('===========', 10, 60);
                 //console.log(ctx.measureText(txt).width);
 
@@ -201,6 +201,7 @@
                         if (inputStr.split(" ")[1] === "casual") {
                             let pickedChannel = inputStr.split(" ")[1];
                             switchChannel("message_chcasual", "response_chcasual");
+                            curCh = "casual";
                             msgChannel = "message_chcasual";
                             reChannel = "response_chcasual";
 
@@ -209,6 +210,7 @@
                         } else if (inputStr.split(" ")[1] === "main") {
                             let pickedChannel = inputStr.split(" ")[1];
                             switchChannel("message_chmain", "response_chmain");
+                            curCh = "main";
                             msgChannel = "message_chmain";
                             reChannel = "response_chmain";
                             
@@ -217,6 +219,7 @@
                         } else if (inputStr.split(" ")[1] === "schoolstuff") {
                             let pickedChannel = inputStr.split(" ")[1];
                             switchChannel("message_chschoolstuff", "response_chschoolstuff");
+                            curCh = "schoolstuff";
                             msgChannel = "message_chschoolstuff";
                             reChannel = "response_chschoolstuff";
                             
@@ -315,6 +318,7 @@
 
             let msgChannel = "message_chmain";
             let reChannel = "response_chmain";
+            let curCh = "main"
 
             let currentListener = null;
 
