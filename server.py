@@ -54,4 +54,4 @@ def handle_client_datach3(data):
 #threadch3.start()
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True)
+    socketio.run(app, allow_unsafe_werkzeug=True)
