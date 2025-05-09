@@ -16,11 +16,17 @@ connected_users = set()
 def handle_connect():
     connected_users.add(request.sid)
     print(f"User connected: {request.sid}, total: {len(connected_users)}")
+    socketio.emit('response_chmain', {'message': f"User connected! Total users: {len(connected_users)}"})
+    socketio.emit('response_chcasual', {'message': f"User connected! Total users: {len(connected_users)}"})
+    socketio.emit('response_chschoolstuff', {'message': f"User connected! Total users: {len(connected_users)}"})
 
 @socketio.on('disconnect')
 def handle_disconnect():
     connected_users.discard(request.sid)
     print(f"User disconnected: {request.sid}, total: {len(connected_users)}")
+    socketio.emit('response_chmain', {'message': f"User disconnected! Total users: {len(connected_users)}"})
+    socketio.emit('response_chcasual', {'message': f"User disconnected! Total users: {len(connected_users)}"})
+    socketio.emit('response_chschoolstuff', {'message': f"User disconnected! Total users: {len(connected_users)}"})
 
 @socketio.on('message_chmain')
 def handle_client_datach1(data):
